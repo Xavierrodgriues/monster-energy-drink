@@ -18,9 +18,8 @@ const initialState = {
       price: 99,
       volume: "473ml",
       caffeineContent: "160mg",
-      // image: "/monster-resources-hackathon/MonsterOriginalFlavour/MonsterEnergyDrink-removebg-preview.png",
       image:
-        "https://i.pinimg.com/736x/e8/94/6a/e8946af77662c66ce01e27ed55d50810.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product1.jpg?updatedAt=1752859784998",
       available: true,
       rating: 4.6,
       ingredients: [
@@ -44,7 +43,7 @@ const initialState = {
       volume: "473ml",
       caffeineContent: "150mg",
       image:
-        "https://i.pinimg.com/736x/1a/2d/ba/1a2dbad91f29c32d25e5fcab8399b036.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product2.jpg?updatedAt=1752859784983",
       available: true,
       rating: 4.8,
       ingredients: [
@@ -68,7 +67,7 @@ const initialState = {
       volume: "355ml",
       caffeineContent: "140mg",
       image:
-        "https://i.pinimg.com/736x/e6/62/ee/e662ee392194127f40d1775f674bc447.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product3.jpg?updatedAt=1752859784960",
       available: true,
       rating: 4.7,
       ingredients: [
@@ -92,7 +91,7 @@ const initialState = {
       volume: "473ml",
       caffeineContent: "140mg",
       image:
-        "https://i.pinimg.com/736x/32/ac/dd/32acddc067f504dd55c38f064577eee4.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product4.jpg?updatedAt=1752859784918",
       available: true,
       rating: 4.3,
       ingredients: [
@@ -116,7 +115,7 @@ const initialState = {
       volume: "355ml",
       caffeineContent: "150mg",
       image:
-        "https://i.pinimg.com/1200x/b3/3f/a1/b33fa15ad76f94a83fe7c19afee28acf.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product5.jpg?updatedAt=1752859785065",
       available: true,
       rating: 4.5,
       ingredients: [
@@ -139,7 +138,7 @@ const initialState = {
       volume: "650ml",
       caffeineContent: "188mg",
       image:
-        "https://i.pinimg.com/736x/bc/0f/16/bc0f16f34f996fe4b8e3144f43c9e533.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product6.jpg?updatedAt=1752859784921",
       available: true,
       rating: 4.2,
       ingredients: ["Water", "Electrolytes", "Caffeine", "L-Carnitine"],
@@ -157,7 +156,7 @@ const initialState = {
       volume: "473ml",
       caffeineContent: "160mg",
       image:
-        "https://i.pinimg.com/736x/aa/bf/9b/aabf9b7ae1eddcaf1a9d20c62b6d2cae.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product7.jpg?updatedAt=1752859784949",
       available: false,
       rating: 4.4,
       ingredients: ["Tea Extract", "Mango Juice", "Electrolytes", "Caffeine"],
@@ -175,7 +174,7 @@ const initialState = {
       volume: "355ml",
       caffeineContent: "140mg",
       image:
-        "https://i.pinimg.com/736x/db/51/84/db51844ed8b0c0b6bcd9e30811d6446e.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product8.jpg?updatedAt=1752859784906",
       available: true,
       rating: 4.7,
       ingredients: ["Carbonated Water", "Caffeine", "Sucralose", "Citric Acid"],
@@ -193,7 +192,7 @@ const initialState = {
       volume: "473ml",
       caffeineContent: "160mg",
       image:
-        "https://i.pinimg.com/736x/93/bb/33/93bb335f0889fc2524d40ed8425f9239.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product9.jpg?updatedAt=1752859785049",
       available: true,
       rating: 4.6,
       ingredients: ["Mixed Juices", "Carbonated Water", "Caffeine", "Taurine"],
@@ -211,7 +210,7 @@ const initialState = {
       volume: "473ml",
       caffeineContent: "160mg",
       image:
-        "https://i.pinimg.com/736x/3c/9b/d8/3c9bd8e5b071a492c87a342c4aa8792d.jpg",
+        "https://ik.imagekit.io/wr6ziyjiu/product10.jpg?updatedAt=1752859784806",
       available: true,
       rating: 4.5,
       ingredients: ["Carbonated Water", "Sugar", "Caffeine", "Taurine"],

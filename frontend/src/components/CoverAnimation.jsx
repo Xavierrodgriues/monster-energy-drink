@@ -28,7 +28,7 @@ const CoverAnimation = ({ onFinish }) => {
         className="w-full h-full object-cover"
         autoPlay
         muted
-        src="/monster-resources-hackathon/logo-animation.mp4"
+        src="https://ik.imagekit.io/wr6ziyjiu/logo-animation.webm/ik-video.mp4?updatedAt=1752864151852"
       />
     </div>
   );

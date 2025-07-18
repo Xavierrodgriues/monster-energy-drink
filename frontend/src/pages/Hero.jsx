@@ -6,7 +6,7 @@ const Hero = () => {
       {/* Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
-        src="/monster-resources-hackathon/HeroHand - Made with Clipchamp.mp4"
+        src="https://ik.imagekit.io/wr6ziyjiu/heroVideo.webm/ik-video.mp4?updatedAt=1752864294616"
         autoPlay
         muted
         loop
