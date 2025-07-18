@@ -11,6 +11,7 @@ import Contact from "./pages/Contact"
 import About from "./pages/About"
 import ProductDetails from "./pages/ProductDetails";
 import Labubu from "./pages/Labubu";
+import CartPage from "./pages/CartPage";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -60,6 +61,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/drinks/:id" element={<ProductDetails />} />
+            <Route path="/drinks/cart" element={<CartPage />} />
           </Routes>
       
       </div>
