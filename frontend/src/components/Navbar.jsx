@@ -1,0 +1,157 @@
+import { useState } from "react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
+import { NavLink } from "react-router-dom";
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Drinks", path: "/drinks" },
+    { label: "Contact", path: "/contact" },
+  ];
+
+  return (
+    <div>
+      <div className="flex items-center justify-between px-4 md:px-10 py-4">
+        {/* Left: Logo */}
+        <div className="h-10 flex-shrink-0">
+          <img
+            className="h-full"
+            src="/monster-resources-hackathon/monster-logo.png"
+            alt="Logo"
+          />
+        </div>
+
+        {/* Center: Desktop Nav Menu */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <div className="bg-black/20 md:p-[0rem] backdrop-blur-md rounded-3xl overflow-hidden shadow-lg border border-white/30 px-4 py-1">
+            <ul className="flex h-full">
+              {navItems.map((item) => (
+                <li key={item.path} className="relative">
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `relative z-10 w-30 md:p-[0.8rem] flex items-center justify-center px-6 text-sm transition-all duration-300
+           ${isActive ? "text-black" : "hover:bg-white/10 text-white"}`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        {item.label}
+                        {isActive && (
+                          <span className="hidden md:block absolute inset-0 bg-white z-[-1] rounded-[1.5rem]"></span>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right: Login (Desktop) */}
+        <div className="hidden md:block flex-shrink-0">
+          <p className="cursor-pointer bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-5 rounded-full ">
+            <header>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </header>
+          </p>
+        </div>
+        <div className="hidden md:block ml-1 flex-shrink-0">
+          <p className="cursor-pointer w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-1 rounded-full ">
+            <img
+              src="../../public/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
+              alt=""
+            />
+          </p>
+        </div>
+
+        {/* Right: Mobile Hamburger & Login */}
+        <div className="md:hidden flex items-center gap-4">
+          <p className="cursor-pointer text-sm bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-5 rounded-full ">
+            <header>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </header>
+          </p>
+          {/* 👇 Add this for cart icon on mobile */}
+          <div className="w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer">
+            <img
+              src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
+              alt="Cart"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-[70px] left-4 right-4 z-50 bg-black/30 backdrop-blur-md rounded-xl shadow-md border border-white/10">
+          <ul className="flex flex-col items-center gap-2 py-4">
+            {navItems.map((item) => (
+              <li key={item.path} className="w-full text-center">
+                <NavLink
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `w-full block px-6 py-2 text-sm transition-all duration-300 ${
+                      isActive
+                        ? "bg-white text-black rounded-md"
+                        : "hover:bg-white/10 text-white"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Navbar;
