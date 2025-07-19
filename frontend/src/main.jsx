@@ -6,7 +6,6 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
-import { CouponProvider } from "./context/CouponContext";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!PUBLISHABLE_KEY) {
@@ -17,9 +16,7 @@ createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <BrowserRouter>
       <Provider store={store}>
-        <CouponProvider>
-          <App />
-        </CouponProvider>
+        <App />
       </Provider>
     </BrowserRouter>
   </ClerkProvider>

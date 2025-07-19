@@ -3,10 +3,9 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import FiltersContent from "../components/FiltersContent";
 import ProductCard from "../components/ProductCard";
-import { useUser } from "@clerk/clerk-react";
-import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCoupon } from "../context/CouponContext";
+import { useUser } from "@clerk/clerk-react";
+import { toast } from "react-toastify";
 
 const Drinks = () => {
   const { allDrinks, filteredDrinks, filters } = useSelector(
@@ -20,61 +19,63 @@ const Drinks = () => {
   const isFilterApplied = Object.values(filters).some((val) => val.length > 0);
   const drinksToRender = isFilterApplied ? filteredDrinks : allDrinks;
 
-  const [emailInput, setEmailInput] = useState("");
-  const [isCooldown, setIsCooldown] = useState(false);
+  const isValidEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const { user } = useUser();
+  const [emailInput, setEmailInput] = useState("");
+  const [cooldown, setCooldown] = useState(false);
 
-  const { coupons } = useCoupon();
-
-  const handleGenerateCoupon = async () => {
-    if (!user) {
-      toast.error("You must be logged in to get a coupon.");
-      return;
+  const handleGetCoupon = async () => {
+    if (!emailInput) {
+      return toast.error("Please enter your email.");
     }
 
-    const userEmail = user.primaryEmailAddress?.emailAddress;
-
-    if (emailInput.trim().toLowerCase() !== userEmail.toLowerCase()) {
-      toast.error("Entered email does not match your logged-in email.");
-      return;
+    if (!isValidEmail(emailInput)) {
+      return toast.error("Invalid email format.");
     }
 
-    if (isCooldown) {
-      toast.info("Please wait 20 seconds before generating another coupon.");
-      return;
+    if (emailInput !== user?.primaryEmailAddress?.emailAddress) {
+      return toast.error("Entered email does not match your logged-in email.");
     }
 
-    const selectedCoupon = coupons[Math.floor(Math.random() * coupons.length)];
+    if (cooldown) {
+      return toast.warn("Please wait 20 seconds before requesting again.");
+    }
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/send-coupon`, {
+      setCooldown(true);
+
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/coupons/assign-coupon`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: userEmail,
-          code: selectedCoupon.code,
-          discount: selectedCoupon.discount, 
-        }),
+        body: JSON.stringify({ email: emailInput }),
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      if (res.ok) {
+      if (response.ok) {
         toast.success(
-          `🎉 Coupon send in you email.`
+          `🎉 Coupon sent to ${emailInput}! Expires on ${new Date(
+            data.expiresAt
+          ).toLocaleDateString()}`
         );
       } else {
-        toast.error(data.error || "Failed to send coupon.");
+        toast.error(data.message || "Failed to get coupon.");
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Server error while sending coupon.");
-    }
 
-    setIsCooldown(true);
-    setTimeout(() => setIsCooldown(false), 20000);
+      // Cooldown reset after 20 seconds
+      setTimeout(() => {
+        setCooldown(false);
+      }, 20000);
+    } catch (error) {
+      toast.error("Something went wrong!" + error);
+      setCooldown(false);
+    }
   };
 
   return (
@@ -132,21 +133,20 @@ const Drinks = () => {
               <div className="mt-4 flex items-center gap-2 justify-center lg:justify-start">
                 <input
                   type="email"
-                  placeholder="Your email address"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder="Your email address"
                   className="p-2 border focus:border-lime-400 outline-none border-gray-400 rounded"
                 />
+
                 <button
-                  onClick={handleGenerateCoupon}
+                  onClick={handleGetCoupon}
+                  disabled={cooldown}
                   className={`px-4 py-2 rounded text-black active:scale-95 ${
-                    isCooldown
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-lime-400"
+                    cooldown ? "bg-gray-400 cursor-not-allowed" : "bg-lime-400"
                   }`}
-                  disabled={isCooldown}
                 >
-                  Get Coupon
+                  {cooldown ? "Wait..." : "Get Coupon"}
                 </button>
 
                 {/* Toast Container */}
