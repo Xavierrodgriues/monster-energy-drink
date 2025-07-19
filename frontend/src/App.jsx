@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import CoverAnimation from "./components/CoverAnimation";
-import Hero from "./pages/Hero";
-import Flavour from "./pages/Flavour";
-import Drinks from "./pages/Drinks";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import Contact from "./pages/Contact"
-import About from "./pages/About"
-import ProductDetails from "./pages/ProductDetails";
-import Labubu from "./pages/Labubu";
-import CartPage from "./pages/CartPage";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+// Lazy load pages
+const Hero = lazy(() => import("./pages/Hero"));
+const Flavour = lazy(() => import("./pages/Flavour"));
+const Drinks = lazy(() => import("./pages/Drinks"));
+const Contact = lazy(() => import("./pages/Contact"));
+const About = lazy(() => import("./pages/About"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const Labubu = lazy(() => import("./pages/Labubu"));
+const CartPage = lazy(() => import("./pages/CartPage"));
 
 function App() {
   const location = useLocation();
   const [showCover, setShowCover] = useState(false);
 
-  // Show cover only on "/" route
   useEffect(() => {
     if (location.pathname === "/") {
       setShowCover(true);
@@ -28,7 +31,6 @@ function App() {
     }
   }, [location.pathname]);
 
-  // Initialize scroll smoother once
   useEffect(() => {
     ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
@@ -42,10 +44,8 @@ function App() {
     <div id="smooth-wrapper" className="relative">
       {showCover && <CoverAnimation onFinish={() => setShowCover(false)} />}
 
-      <div
-        id="smooth-content"
-        className={`${showCover ? "overflow-hidden h-screen" : ""}`}
-      >
+      <div id="smooth-content" className={`${showCover ? "overflow-hidden h-screen" : ""}`}>
+        <Suspense fallback={<div className="text-white text-center py-10">Loading...</div>}>
           <Routes location={location} key={location.pathname}>
             <Route
               path="/"
@@ -63,7 +63,8 @@ function App() {
             <Route path="/drinks/:id" element={<ProductDetails />} />
             <Route path="/drinks/cart" element={<CartPage />} />
           </Routes>
-      
+        </Suspense>
+        <ToastContainer position="top-center" autoClose={3000} />
       </div>
     </div>
   );

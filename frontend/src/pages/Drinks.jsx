@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import FiltersContent from "../components/FiltersContent";
-import { Link } from "react-router";
-import { ArrowUpRight } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import { useUser } from "@clerk/clerk-react";
+import { toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useCoupon } from "../context/CouponContext";
 
 const Drinks = () => {
   const { allDrinks, filteredDrinks, filters } = useSelector(
@@ -17,6 +19,63 @@ const Drinks = () => {
 
   const isFilterApplied = Object.values(filters).some((val) => val.length > 0);
   const drinksToRender = isFilterApplied ? filteredDrinks : allDrinks;
+
+  const [emailInput, setEmailInput] = useState("");
+  const [isCooldown, setIsCooldown] = useState(false);
+  const { user } = useUser();
+
+  const { coupons } = useCoupon();
+
+  const handleGenerateCoupon = async () => {
+    if (!user) {
+      toast.error("You must be logged in to get a coupon.");
+      return;
+    }
+
+    const userEmail = user.primaryEmailAddress?.emailAddress;
+
+    if (emailInput.trim().toLowerCase() !== userEmail.toLowerCase()) {
+      toast.error("Entered email does not match your logged-in email.");
+      return;
+    }
+
+    if (isCooldown) {
+      toast.info("Please wait 20 seconds before generating another coupon.");
+      return;
+    }
+
+    const selectedCoupon = coupons[Math.floor(Math.random() * coupons.length)];
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/send-coupon`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          code: selectedCoupon.code,
+          discount: selectedCoupon.discount, 
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(
+          `🎉 Coupon send in you email.`
+        );
+      } else {
+        toast.error(data.error || "Failed to send coupon.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Server error while sending coupon.");
+    }
+
+    setIsCooldown(true);
+    setTimeout(() => setIsCooldown(false), 20000);
+  };
 
   return (
     <div className="bg-[#090701] text-white min-h-screen">
@@ -64,9 +123,9 @@ const Drinks = () => {
 
         {/* Main Content */}
         <main className="w-full h-full lg:w-4/5 p-4 space-y-10">
-          <div className="bg-white md:h-[30vh] text-black rounded-lg p-6 flex flex-col lg:flex-row justify-between items-center">
+          <div className="text-white md:h-[30vh] rounded-lg p-6 flex flex-col lg:flex-row justify-between items-center">
             <div className="text-center lg:text-left mb-4 lg:mb-0">
-              <h1 className="text-3xl font-bold">Pure Coffee Big Discount</h1>
+              <h1 className="text-3xl font-bold">Pure Energy Big Discount</h1>
               <p className="text-lg mt-2">
                 Save up to 50% off on your first order
               </p>
@@ -74,14 +133,32 @@ const Drinks = () => {
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="p-2 border border-gray-400 rounded"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  className="p-2 border focus:border-lime-400 outline-none border-gray-400 rounded"
                 />
-                <button className="bg-lime-400 text-black px-4 py-2 rounded">
-                  Subscribe
+                <button
+                  onClick={handleGenerateCoupon}
+                  className={`px-4 py-2 rounded text-black active:scale-95 ${
+                    isCooldown
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-lime-400"
+                  }`}
+                  disabled={isCooldown}
+                >
+                  Get Coupon
                 </button>
+
+                {/* Toast Container */}
               </div>
             </div>
-            <div className="h-28 w-28 bg-gray-400 rounded-lg" />
+
+            {/* Image instead of colored box */}
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs9xYUoN65O3g0X9X5QkfMgDng7TEvoA96XGFv8VniRE9rCA9Kxd4pN-_2gGwmGP2kDENm2uvWtW-A2M_WkQ6OXrzKN-cEekF11s_d0J4Vwj2RfaIjIgAylcY5InD7DtPo2zZUz7NjDEQ/s1600/Tickle_LasVegas_Cox_2011_077.jpg" // Replace with actual path or URL
+              alt="Coffee Discount"
+              className="h-35 w-35 object-cover rounded-lg"
+            />
           </div>
 
           {/* Product Grid */}

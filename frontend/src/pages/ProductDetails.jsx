@@ -99,6 +99,7 @@ const ProductDetails = () => {
                       name: drink.name,
                       image: drink.image,
                       price: drink.price,
+                      packSize: drink.packSize
                     })
                   )
                 }
