@@ -7,7 +7,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from "./pages/CheckoutPage";
-import OrdersPage from "./pages/OrdersPage";
+import MyOrders from "./pages/MyOrders";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -43,7 +43,7 @@ function App() {
   }, []);
 
   return (
-    <div id="smooth-wrapper" className="relative">
+    <div id="smooth-wrapper" className="relative bg-black">
       {showCover && <CoverAnimation onFinish={() => setShowCover(false)} />}
 
       <div id="smooth-content" className={`${showCover ? "overflow-hidden h-screen" : ""}`}>
@@ -65,7 +65,7 @@ function App() {
             <Route path="/drinks/:id" element={<ProductDetails />} />
             <Route path="/drinks/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/order-success" element={<OrdersPage />} />
+            <Route path="/myOrders" element={<MyOrders />}/>
           </Routes>
         </Suspense>
         <ToastContainer position="top-center" autoClose={3000} />

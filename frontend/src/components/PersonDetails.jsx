@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { clearCart } from "../redux/CartSlice";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUser } from "@clerk/clerk-react";
 
 const PersonDetails = ({ totalCost }) => {
   const {
@@ -13,7 +14,9 @@ const PersonDetails = ({ totalCost }) => {
     formState: { errors },
   } = useForm();
 
-  // const navigate = useNavigate();
+  const {user} = useUser();
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
@@ -56,6 +59,7 @@ const PersonDetails = ({ totalCost }) => {
         order_id: orderData.id,
         handler: async function (response) {
           const orderData = {
+            userId: user.id,
             userName: `${data.firstName} ${data.lastName}`,
             email: data.email,
             phone: data.phone,
@@ -97,7 +101,7 @@ const PersonDetails = ({ totalCost }) => {
               dispatch(clearCart());
 
               // ✅ Optional: Redirect to success page
-              // navigate("/order-success");
+              navigate("/myOrders");
             } else {
               toast.error("Failed to save order");
             }
