@@ -7,6 +7,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from "./pages/CheckoutPage";
+import OrdersPage from "./pages/OrdersPage";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -64,6 +65,7 @@ function App() {
             <Route path="/drinks/:id" element={<ProductDetails />} />
             <Route path="/drinks/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-success" element={<OrdersPage />} />
           </Routes>
         </Suspense>
         <ToastContainer position="top-center" autoClose={3000} />
