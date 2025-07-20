@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import ImageMagnifier from "../components/ImageMagnifier";
@@ -103,13 +103,13 @@ const ProductDetails = () => {
                     })
                   )
                 }
-                className="bg-lime-400 text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold"
+                className="bg-lime-400 active:scale-95 text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold"
               >
                 Add to Cart
               </button>
-              <button className="border border-white px-6 py-2 rounded hover:bg-white hover:text-black transition font-semibold">
+              <NavLink to={"/drinks/cart"} className="border active:scale-95 border-white px-6 py-2 rounded hover:bg-white hover:text-black transition font-semibold">
                 Buy Now
-              </button>
+              </NavLink>
             </div>
 
             {/* Description */}

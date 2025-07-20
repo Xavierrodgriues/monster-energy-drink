@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQuantity, clearCart } from "../redux/CartSlice";
+import { applyCoupon, removeCoupon } from "../redux/couponSlice";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useUser } from "@clerk/clerk-react"; // for email
+import { useUser } from "@clerk/clerk-react";
+import OrderSummary from "../components/OrderSummary";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+  const { coupon } = useSelector((state) => state.coupon);
   const { user } = useUser();
 
   const [couponCode, setCouponCode] = useState("");
-  const [discountPercent, setDiscountPercent] = useState(0);
-  const [isCouponApplied, setIsCouponApplied] = useState(false);
 
   const handleQuantityChange = (id, delta) => {
     const item = cartItems.find((item) => item.id === id);
@@ -25,13 +26,6 @@ const CartPage = () => {
       dispatch(updateQuantity({ id, quantity: newQuantity }));
     }
   };
-
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-  const shipping = 5;
 
   const handleApplyCoupon = async () => {
     if (!couponCode.trim()) {
@@ -54,8 +48,7 @@ const CartPage = () => {
       const data = await res.json();
 
       if (data.valid) {
-        setDiscountPercent(data.discount); // ✅ use dynamic discount
-        setIsCouponApplied(true);
+        dispatch(applyCoupon({ code: couponCode, discount: data.discount }));
         toast.success(`Coupon applied! ${data.discount}% discount`);
       } else {
         toast.error(data.message || "Invalid or expired coupon");
@@ -66,6 +59,13 @@ const CartPage = () => {
     }
   };
 
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const subtotal = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  const shipping = 5;
+  const discountPercent = coupon?.discount || 0;
   const discountAmount = (subtotal * discountPercent) / 100;
   const totalCost = subtotal - discountAmount + shipping;
 
@@ -137,72 +137,19 @@ const CartPage = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="w-full lg:w-1/3 bg-[#1e1e1e] p-6 rounded-lg h-fit">
-          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-          <div className="flex justify-between py-2 border-b border-gray-700">
-            <p>Items</p>
-            <p>₹{subtotal.toFixed(2)}</p>
-          </div>
-          <div className="flex justify-between py-2 border-b border-gray-700">
-            <p>Shipping</p>
-            <p>₹{shipping.toFixed(2)}</p>
-          </div>
-
-          {/* Promo Code */}
-          <div className="py-4">
-            <label className="block mb-2">Promo Code</label>
-            <div className="flex items-center justify-between gap-2">
-              <input
-                type="text"
-                value={couponCode}
-                onChange={(e) => setCouponCode(e.target.value)}
-                placeholder="Enter your code"
-                className="w-full p-2 bg-gray-800 text-white border border-gray-600 rounded"
-              />
-              {isCouponApplied && (
-                <button
-                  onClick={() => {
-                    setDiscountPercent(0);
-                    setIsCouponApplied(false);
-                    setCouponCode("");
-                    toast.info("Coupon removed");
-                  }}
-                  className="bg-red-500 hover:bg-red-500/80 px-4 py-2 rounded text-black font-bold"
-                >
-                  Remove
-                </button>
-              )}
-
-              <button
-                onClick={handleApplyCoupon}
-                className="bg-lime-400 hover:bg-lime-400/80 px-4 py-2 rounded text-black font-bold"
-              >
-                Apply
-              </button>
-            </div>
-            {isCouponApplied && (
-              <p className="text-sm text-green-400 mt-2">Coupon applied!</p>
-            )}
-          </div>
-
-          {/* Discount */}
-          {isCouponApplied && (
-            <div className="flex justify-between text-sm text-green-400">
-              <p>Discount ({discountPercent}%)</p>
-              <p>- ₹{discountAmount.toFixed(2)}</p>
-            </div>
-          )}
-
-          {/* Total */}
-          <div className="flex justify-between text-lg font-bold mt-4 mb-2">
-            <p>Total Cost</p>
-            <p>₹{totalCost.toFixed(2)}</p>
-          </div>
-
-          <button className="w-full bg-[#EE440E] hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4">
-            Checkout
-          </button>
-        </div>
+        <OrderSummary
+          subtotal={subtotal}
+          shipping={shipping}
+          discountPercent={discountPercent}
+          discountAmount={discountAmount}
+          totalCost={totalCost}
+          couponCode={couponCode}
+          setCouponCode={setCouponCode}
+          handleApplyCoupon={handleApplyCoupon}
+          isCouponApplied={coupon?.code ? true : false}
+          setIsCouponApplied={() => dispatch(removeCoupon())} // ✅ Add this line
+          setDiscountPercent={() => dispatch(removeCoupon())}  // ✅ Add this line
+        />
       </div>
 
       <div className="mt-6">
