@@ -4,7 +4,9 @@ const cors = require("cors");
 const dbConnection = require("./db/dbConfig");
 const couponRouter = require("./routes/coupon.routes");
 const app = express();
-const PORT = process.env.PORT || 3100;
+const PORT = process.env.PORT || 8000;
+const paymentRoutes = require("./routes/payment.routes");
+const orderRoutes = require("./routes/order.routes");
 
 // Middleware
 app.use(cors());
@@ -14,12 +16,15 @@ app.use(express.json());
 dbConnection();
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { 
   res.send("Welcome to server");
 })
 
 // Routes
 app.use("/api/coupons", couponRouter);
+app.use("/api/payment", paymentRoutes);
+app.use("/api/orders", orderRoutes);
+
 
 
 // Start Server
