@@ -43,7 +43,7 @@ const FiltersContent = () => {
                   dispatch(resetFilterCategory(filterName));
                   dispatch(applyFilters());
                 }}
-                className="text-xs text-gray-300 underline hover:text-white transition"
+                className="text-xs hover:cursor-pointer text-gray-300 underline hover:text-white transition"
               >
                 Reset
               </button>

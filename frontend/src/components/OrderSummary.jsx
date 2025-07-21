@@ -14,6 +14,7 @@ const OrderSummary = ({
   setIsCouponApplied,
   setDiscountPercent,
   showActions = true,
+  showCheckout = true,
 }) => {
   const navigate = useNavigate();
   return (
@@ -81,12 +82,14 @@ const OrderSummary = ({
         <p>₹{totalCost.toFixed(2)}</p>
       </div>
 
-      <button
-        onClick={() => navigate("/checkout")}
-        className="w-full bg-[#EE440E] hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
-      >
-        Checkout
-      </button>
+      {showCheckout && (
+        <button
+          onClick={() => navigate("/checkout")}
+          className="w-full bg-[#EE440E] hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
+        >
+          Checkout
+        </button>
+      )}
     </div>
   );
 };

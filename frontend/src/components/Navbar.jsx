@@ -6,6 +6,7 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,8 +15,13 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Story", path: "/story" },
     { label: "Drinks", path: "/drinks" },
+    { label: "Orders", path: "/myOrders" },
     { label: "Contact", path: "/contact" },
   ];
+
+  const totalItems = useSelector((state) =>
+    state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0)
+  );
 
   return (
     <div className="w-full">
@@ -40,7 +46,9 @@ const Navbar = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
                       `relative z-10 w-30 md:p-2 flex items-center justify-center px-6 text-sm transition-all duration-300
-                      ${isActive ? "text-black" : "hover:bg-white/10 text-white"}`
+                      ${
+                        isActive ? "text-black" : "hover:bg-white/10 text-white"
+                      }`
                     }
                   >
                     {({ isActive }) => (
@@ -71,12 +79,17 @@ const Navbar = () => {
             </header>
           </div>
           <NavLink to={"/drinks/cart"}>
-            <div className="w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
+            <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
                 src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
                 alt="Cart"
                 className="w-full h-full object-contain"
               />
+              {totalItems > 0 && (
+                <span className="animate-bounce absolute -top-2 -right-2 min-w-[18px] h-[18px] text-xs bg-red-600 text-white rounded-full flex items-center justify-center px-[5px]">
+                  {totalItems}
+                </span>
+              )}
             </div>
           </NavLink>
         </div>
@@ -95,12 +108,17 @@ const Navbar = () => {
           </div>
 
           <NavLink to={"/drinks/cart"}>
-            <div className="w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
+            <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
                 src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
                 alt="Cart"
                 className="w-full h-full object-contain"
               />
+              {totalItems > 0 && (
+                <span className="animate-bounce absolute -top-2 -right-2 min-w-[18px] h-[18px] text-xs bg-red-600 text-white rounded-full flex items-center justify-center px-[5px]">
+                  {totalItems}
+                </span>
+              )}
             </div>
           </NavLink>
 

@@ -59,23 +59,13 @@ const ProductDetails = () => {
 
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Image Section */}
-          <div className="lg:w-1/2 bg-[#13120f] p-6 rounded-md">
+          <div className="self-start lg:w-1/2 bg-[#13120f] p-6 rounded-md">
             <div className="aspect-square rounded-xl overflow-hidden">
               <ImageMagnifier
                 src={drink.image}
                 alt={drink.name}
                 className="rounded-xl"
               />
-            </div>
-            <div className="flex gap-3 mt-4 justify-center">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src={drink.image}
-                  alt={`thumb-${i}`}
-                  className="w-20 h-20 object-contain rounded bg-[#1e1d1b] border border-[#2e2e2e] p-1 cursor-pointer"
-                />
-              ))}
             </div>
           </div>
 
@@ -99,16 +89,22 @@ const ProductDetails = () => {
                       name: drink.name,
                       image: drink.image,
                       price: drink.price,
-                      packSize: drink.packSize
+                      packSize: drink.packSize,
                     })
                   )
                 }
-                className="bg-lime-400 active:scale-95 text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold"
+                className="bg-lime-400 active:scale-95 cursor-pointer text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold"
               >
                 Add to Cart
               </button>
-              <NavLink to={"/drinks/cart"} className="border active:scale-95 border-white px-6 py-2 rounded hover:bg-white hover:text-black transition font-semibold">
-                Buy Now
+              <NavLink
+                to={"/drinks/cart"}
+                className="relative overflow-hidden border border-white px-6 py-2 rounded font-semibold text-white transition-all duration-800 group"
+              >
+                <span className="relative z-10 group-hover:text-black transition-all duration-800">
+                  Buy Now
+                </span>
+                <span className="absolute left-0 top-0 w-0 h-full bg-white z-0 transition-all duration-800 group-hover:w-full"></span>
               </NavLink>
             </div>
 
@@ -133,7 +129,7 @@ const ProductDetails = () => {
             </div>
 
             {/* Collapsible Sections */}
-            <div className="border-t border-[#2a2a2a] pt-4">
+            <div className="border-t border-[#2a2a2a]">
               {["Shipping", "Reviews"].map((section) => (
                 <div key={section} className="border-b border-[#2a2a2a] py-4">
                   <button
@@ -142,7 +138,7 @@ const ProductDetails = () => {
                         activeSection === section ? null : section
                       )
                     }
-                    className="w-full text-left font-semibold text-lg flex justify-between items-center"
+                    className="w-full hover:cursor-pointer text-left font-semibold text-lg flex justify-between items-center"
                   >
                     {section}
                     <span className="text-xl">
@@ -150,21 +146,25 @@ const ProductDetails = () => {
                     </span>
                   </button>
 
-                  {activeSection === section && (
-                    <div className="mt-3 text-gray-400 text-sm leading-relaxed transition-all duration-300 ease-in-out opacity-100 animate-fadeIn">
-                      {section === "Shipping" ? (
-                        <p>
-                          🚚 Ships in 2-3 business days. Free shipping on orders
-                          over ₹500.
-                        </p>
-                      ) : (
-                        <p>
-                          ⭐️⭐️⭐️⭐️⭐️ — "Absolutely love the flavor and the
-                          energy boost!"
-                        </p>
-                      )}
-                    </div>
-                  )}
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      activeSection === section
+                        ? "max-h-40 opacity-100 mt-3"
+                        : "max-h-0 opacity-0"
+                    } text-gray-400 text-sm leading-relaxed`}
+                  >
+                    {section === "Shipping" ? (
+                      <p>
+                        🚚 Ships in 2-3 business days. Free shipping on orders
+                        over ₹500.
+                      </p>
+                    ) : (
+                      <p>
+                        ⭐️⭐️⭐️⭐️⭐️ — "Absolutely love the flavor and the
+                        energy boost!"
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

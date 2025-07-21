@@ -87,7 +87,7 @@ const Contact = () => {
           </div>
 
           {/* Right: Info Box */}
-          <div className="bg-lime-400 rounded-lg p-6 text-black w-full md:w-1/3 relative h-120 transform hover:rotate-6 transition-transform duration-300">
+          <div className="bg-lime-400 rounded-lg p-6 text-black w-full md:w-1/3 relative h-120 transform hover:rotate-6 transition-transform duration-500">
             <div className="absolute top-[-30px] right-[-30px] bg-black text-white rounded-full w-[140px] h-[140px] flex items-center justify-center text-xs font-bold text-center leading-tight">
               <img
                 className="rotate-320"

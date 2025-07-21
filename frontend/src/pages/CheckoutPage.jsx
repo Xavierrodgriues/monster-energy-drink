@@ -35,7 +35,10 @@ const CheckoutPage = () => {
         setIsCouponApplied={() => {}}
         setDiscountPercent={() => {}}
         showActions={false}
+        showCheckout={false}
       />
+
+      
     </div>
   );
 };

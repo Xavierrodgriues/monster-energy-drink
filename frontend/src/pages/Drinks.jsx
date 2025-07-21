@@ -60,10 +60,9 @@ const Drinks = () => {
 
       if (response.ok) {
         toast.success(
-          `🎉 Coupon sent to ${emailInput}! Expires on ${new Date(
-            data.expiresAt
-          ).toLocaleDateString()}`
+          `🎉 Coupon sent to ${emailInput}`
         );
+        setEmailInput("");
       } else {
         toast.error(data.message || "Failed to get coupon.");
       }
@@ -136,13 +135,13 @@ const Drinks = () => {
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="Your email address"
-                  className="p-2 border focus:border-lime-400 outline-none border-gray-400 rounded"
+                  className="p-2 w-35 md:w-auto border focus:border-lime-400 outline-none border-gray-400 rounded"
                 />
 
                 <button
                   onClick={handleGetCoupon}
                   disabled={cooldown}
-                  className={`px-4 py-2 rounded text-black active:scale-95 ${
+                  className={`px-4 py-2 hover:cursor-pointer rounded text-black active:scale-95 ${
                     cooldown ? "bg-gray-400 cursor-not-allowed" : "bg-lime-400"
                   }`}
                 >
@@ -157,7 +156,7 @@ const Drinks = () => {
             <img
               src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs9xYUoN65O3g0X9X5QkfMgDng7TEvoA96XGFv8VniRE9rCA9Kxd4pN-_2gGwmGP2kDENm2uvWtW-A2M_WkQ6OXrzKN-cEekF11s_d0J4Vwj2RfaIjIgAylcY5InD7DtPo2zZUz7NjDEQ/s1600/Tickle_LasVegas_Cox_2011_077.jpg" // Replace with actual path or URL
               alt="Coffee Discount"
-              className="h-35 w-35 object-cover rounded-lg"
+              className="h-35 w-35 object-cover rounded-lg hidden lg:block"
             />
           </div>
 
@@ -165,7 +164,7 @@ const Drinks = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4">Popular Products</h2>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {drinksToRender
                 .slice(
                   (currentPage - 1) * itemsPerPage,

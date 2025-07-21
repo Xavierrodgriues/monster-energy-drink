@@ -325,7 +325,7 @@ const PersonDetails = ({ totalCost }) => {
         </div>
 
         {/* Buttons */}
-        <div className="pt-4 flex gap-4 justify-end">
+        <div className="pt-4 flex gap-4 justify-between md:justify-end">
           <NavLink
             to={"/drinks/cart"}
             className="p-4 bg-zinc-300 active:scale-95 text-black font-bold py-3 rounded-md shadow-lg hover:bg-zinc-400"

@@ -8,7 +8,7 @@ const ProductCard = ({ drink }) => {
     <Link
       to={`/drinks/${drink.id}`}
       key={drink.id}
-      className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-full"
+      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-full"
     >
       {/* Image Section */}
       <div className="relative overflow-hidden rounded-xl h-[235px]">
@@ -32,7 +32,7 @@ const ProductCard = ({ drink }) => {
       </div>
 
       {/* Arrow icon */}
-      <div className="absolute bottom-1 right-1 w-10 h-10 rounded-full bg-white flex items-center justify-center">
+      <div className="absolute bottom-1 right-1 w-10 h-10 rounded-full bg-white group-hover:bg-lime-400 flex items-center justify-center">
         <ArrowUpRight className="text-black w-6 h-6" />
       </div>
     </Link>
