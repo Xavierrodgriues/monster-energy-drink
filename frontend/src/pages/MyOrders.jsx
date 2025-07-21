@@ -142,10 +142,10 @@ const MyOrders = () => {
                 <div className="flex justify-end">
                   <button
                     onClick={() => handleDownloadInvoice(order)}
-                    className="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded-lg flex items-center justify-center gap-2 text-black"
+                    className="bg-lime-400 hover:bg-lime-500 px-4 py-4 rounded-full flex items-center justify-center gap-2 text-black"
                   >
-                    <Download className="w-4 h-4" />
-                    Download
+                    <Download className="w-5 h-5" />
+                    
                   </button>
                 </div>
               </div>

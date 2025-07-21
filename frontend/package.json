@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
     "framer-motion": "^12.23.6",
+    "gl-matrix": "^3.4.3",
     "gsap": "^3.13.0",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
@@ -31,6 +32,7 @@
     "react-zoom-pan-pinch": "^3.7.0",
     "recharts": "^3.1.0",
     "split-type": "^0.3.4",
+    "swiper": "^11.2.10",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

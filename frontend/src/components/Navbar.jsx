@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const navItems = [
     { label: "Home", path: "/" },
-    { label: "About", path: "/about" },
+    { label: "Story", path: "/story" },
     { label: "Drinks", path: "/drinks" },
     { label: "Contact", path: "/contact" },
   ];
@@ -31,7 +31,7 @@ const Navbar = () => {
 
         {/* Center: Desktop Nav Menu */}
         <div className="hidden md:flex flex-1 justify-center">
-          <div className="bg-black/20 md:p-0 backdrop-blur-md rounded-3xl overflow-hidden shadow-lg border border-white/30 px-4 py-1">
+          <div className="bg-black/20 md:p-0 backdrop-blur-md rounded-3xl overflow-hidden shadow-lg border border-white/30 px-4 py-1 max-h-10">
             <ul className="flex h-full">
               {navItems.map((item) => (
                 <li key={item.path} className="relative">
@@ -39,7 +39,7 @@ const Navbar = () => {
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
-                      `relative z-10 w-30 md:p-[0.8rem] flex items-center justify-center px-6 text-sm transition-all duration-300
+                      `relative z-10 w-30 md:p-2 flex items-center justify-center px-6 text-sm transition-all duration-300
                       ${isActive ? "text-black" : "hover:bg-white/10 text-white"}`
                     }
                   >
