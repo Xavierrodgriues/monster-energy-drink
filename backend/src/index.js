@@ -13,9 +13,6 @@ const myOrdersRoutes = require("./routes/myOrders.routes");
 app.use(cors());
 app.use(express.json());
 
-//Database Connection 
-dbConnection();
-
 // Routes
 app.get("/", (req, res) => { 
   res.send("Welcome to server");
@@ -30,6 +27,16 @@ app.use("/api/orders", myOrdersRoutes);
 
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server started on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await dbConnection(); // Wait for DB connection
+    app.listen(PORT, () => {
+      console.log(`🚀 Server started on http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1); // Exit the process on failure
+  }
+};
+
+startServer();
