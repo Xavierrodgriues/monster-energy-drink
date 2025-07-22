@@ -173,7 +173,9 @@ const Drinks = () => {
                   currentPage * itemsPerPage
                 )
                 .map((drink) => (
-                  <Suspense fallback={<FaSpinner />} key={drink.id}>
+                  <Suspense fallback={<div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-40">
+                    <FaSpinner />
+                  </div>} key={drink.id}>
       <ProductCard drink={drink} />
     </Suspense>
                 ))}

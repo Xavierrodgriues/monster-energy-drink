@@ -46,10 +46,10 @@ const Labubu = () => {
 
   return (
     <div>
-      <div className="bg-pink-100 overflow-hidden border border-pink-200 h-150 rounded-2xl relative flex flex-col">
+      <div className="bg-[#e2c5ca] overflow-hidden border border-[#e2c5ca] h-150 rounded-2xl relative flex flex-col">
         <div className="h-40">
           <div className="h-full w-full flex justify-center items-end">
-            <div className="flex items-center gap-3 bg-purple-300 rounded-4xl w-fit py-2 px-4 ">
+            <div className="flex items-center gap-3 bg-purple-400 rounded-4xl w-fit py-2 px-4 ">
               <div className="w-5 h-5">
                 <img src="/monster-resources-hackathon/sun.svg" alt="" />
               </div>

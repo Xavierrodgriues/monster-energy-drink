@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitType from "split-type";
-import { motion } from "framer-motion";
 import CircularGallery from "../components/CircularGallery";
 import RevealFreaking from "../components/RevealFreaking";
 
@@ -119,7 +118,7 @@ const Flavour = () => {
             textColor="#ffffff"
             borderRadius={0.05}
             scrollEase={0.01}
-            scrollSpeed={0.9}
+            scrollSpeed={0.7}
           />
         </div>
       </div>

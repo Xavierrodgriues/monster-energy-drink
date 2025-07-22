@@ -5,7 +5,7 @@ const ImageMagnifier = ({ src, zoom = 2, className = "" }) => {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const imgRef = useRef(null);
 
-  const magnifierSize = 200;
+  const magnifierSize = 250;
 
   const handleMouseMove = (e) => {
     const { top, left } = imgRef.current.getBoundingClientRect();

@@ -35,36 +35,42 @@ const Contact = () => {
               Join Us in Creating <br /> Something Great
             </h2>
 
-            <form className="grid text-black grid-cols-1 md:grid-cols-2 gap-4">
+            <form className="grid text-black grid-cols-1 md:grid-cols-2 gap-4" method="post" action="https://formsubmit.co/xavierrodgriues123@gmail.com">
               <input
                 type="text"
                 placeholder="First Name*"
                 className="p-3 rounded bg-gray-200"
+                name="firstname"
               />
               <input
                 type="text"
                 placeholder="Last Name*"
                 className="p-3 rounded bg-gray-200"
+                name="lastname"
               />
               <input
                 type="email"
                 placeholder="Email*"
                 className="p-3 rounded bg-gray-200"
+                name="email"
               />
               <input
                 type="text"
                 placeholder="Phone Number*"
                 className="p-3 rounded bg-gray-200"
+                name="phone"
               />
               <input
                 type="text"
                 placeholder="Subject*"
                 className="p-3 rounded bg-gray-200 md:col-span-2"
+                name="subject"
               />
               <textarea
                 placeholder="Message*"
                 rows="4"
                 className="p-3 rounded bg-gray-200 md:col-span-2"
+                name="message"
               ></textarea>
               <div className="flex sm:flex-row gap-3 sm:gap-5 mt-4 text-sm">
                 <button className="bg-lime-400 hover:cursor-pointer active:scale-95 text-black font-semibold px-6 py-3 rounded-full w-fit">

@@ -325,14 +325,14 @@ class App {
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product1.jpg?updatedAt=1752859784998`, text: "Bridge" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product2.jpg?updatedAt=1752859784983`, text: "Desk Setup" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product3.jpg?updatedAt=1752859784960`, text: "Waterfall" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product4.jpg?updatedAt=1752859784918`, text: "Strawberries" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product5.jpg?updatedAt=1752859785065`, text: "Strawberries" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product6.jpg?updatedAt=1752859784921`, text: "Strawberries" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/carousel_image_7.jpg?updatedAt=1753178066316`, text: "Strawberries" },
-      { image: `https://ik.imagekit.io/wr6ziyjiu/product8.jpg?updatedAt=1752859784906`, text: "Strawberries" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product1.jpg?updatedAt=1752859784998`, text: "Original" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product2.jpg?updatedAt=1752859784983`, text: "Mango Loco" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product3.jpg?updatedAt=1752859784960`, text: "Sunrise" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product4.jpg?updatedAt=1752859784918`, text: "Zero Sugar" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product5.jpg?updatedAt=1752859785065`, text: "Watermelon" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product6.jpg?updatedAt=1752859784921`, text: "Hydro" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/carousel_image_7.jpg?updatedAt=1753178066316`, text: "BlueBarry" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/product8.jpg?updatedAt=1752859784906`, text: "Mnonster Ultra" },
       
     ];
     const galleryItems = items && items.length ? items : defaultItems;
