@@ -1,20 +1,18 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import CoverAnimation from "./components/CoverAnimation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CheckoutPage from "./pages/CheckoutPage";
-import MyOrders from "./pages/MyOrders";
 import { FaSpinner } from "react-icons/fa";
+import Hero from "./pages/Hero";
+import CoverAnimation from "./components/CoverAnimation";
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 // Lazy load pages
-const Hero = lazy(() => import("./pages/Hero"));
 const Flavour = lazy(() => import("./pages/Flavour"));
 const Drinks = lazy(() => import("./pages/Drinks"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -23,6 +21,8 @@ const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Labubu = lazy(() => import("./pages/Labubu"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
+const MyOrders = lazy(() => import("./pages/MyOrders"));
 
 function App() {
   const location = useLocation();

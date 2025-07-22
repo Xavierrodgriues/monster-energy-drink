@@ -331,7 +331,7 @@ class App {
       { image: `https://ik.imagekit.io/wr6ziyjiu/product4.jpg?updatedAt=1752859784918`, text: "Strawberries" },
       { image: `https://ik.imagekit.io/wr6ziyjiu/product5.jpg?updatedAt=1752859785065`, text: "Strawberries" },
       { image: `https://ik.imagekit.io/wr6ziyjiu/product6.jpg?updatedAt=1752859784921`, text: "Strawberries" },
-      { image: `../../public/monster-resources-hackathon/carousel_image_7.jpg`, text: "Strawberries" },
+      { image: `https://ik.imagekit.io/wr6ziyjiu/carousel_image_7.jpg?updatedAt=1753178066316`, text: "Strawberries" },
       { image: `https://ik.imagekit.io/wr6ziyjiu/product8.jpg?updatedAt=1752859784906`, text: "Strawberries" },
       
     ];

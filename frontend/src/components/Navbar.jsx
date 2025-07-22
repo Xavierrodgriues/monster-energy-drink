@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="h-10 flex-shrink-0">
           <img
             className="h-full"
-            src="/monster-resources-hackathon/monster-logo.png"
+            src="https://ik.imagekit.io/wr6ziyjiu/monster-logo.png?updatedAt=1753179997542"
             alt="Logo"
           />
         </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
           <NavLink to="/drinks/cart">
             <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
-                src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
+                src="https://ik.imagekit.io/wr6ziyjiu/cart-shopping-svgrepo-com.svg?updatedAt=1753178778980"
                 alt="Cart"
                 className="w-full h-full object-contain"
               />
@@ -113,7 +113,7 @@ const Navbar = () => {
           <NavLink to="/drinks/cart">
             <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
-                src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
+                src="https://ik.imagekit.io/wr6ziyjiu/cart-shopping-svgrepo-com.svg?updatedAt=1753178778980"
                 alt="Cart"
                 className="w-full h-full object-contain"
               />

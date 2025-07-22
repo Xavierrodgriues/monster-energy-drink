@@ -91,7 +91,7 @@ const Labubu = () => {
           >
             <img
               className="w-165"
-              src="/monster-resources-hackathon/labubu.png"
+              src="https://ik.imagekit.io/wr6ziyjiu/labubu.png?updatedAt=1753180212919"
               alt=""
             />
           </motion.div>
@@ -105,7 +105,7 @@ const Labubu = () => {
           >
             <img
               className="w-165"
-              src="/monster-resources-hackathon/labubu.png"
+              src="https://ik.imagekit.io/wr6ziyjiu/labubu.png?updatedAt=1753180212919"
               alt=""
             />
           </motion.div>
@@ -116,7 +116,7 @@ const Labubu = () => {
           >
             <img
               className="w-20"
-              src="/monster-resources-hackathon/transparentTree.png"
+              src="https://ik.imagekit.io/wr6ziyjiu/transparentTree.png?updatedAt=1753179998957"
               alt=""
             />
           </div>

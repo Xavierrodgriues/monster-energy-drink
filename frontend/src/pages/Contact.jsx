@@ -13,11 +13,6 @@ const Contact = () => {
     <div className="bg-[#090701] text-white min-h-screen">
       <Navbar />
       <div className="font-sans">
-        {/* Header */}
-        {/* <header className="bg-black text-white text-center py-6">
-          <h1 className="text-2xl font-semibold text-left px-10">Contact Us</h1>
-          <p className="text-sm mt-1">Home / Contact Us</p>
-        </header> */}
 
         {/* Green Navigation Strip */}
         <nav className="bg-lime-400 hidden h-13 text-black text-lg font-semibold md:flex flex-wrap justify-center gap-6 py-2">
@@ -91,7 +86,7 @@ const Contact = () => {
             <div className="absolute top-[-30px] right-[-30px] bg-black text-white rounded-full w-[140px] h-[140px] flex items-center justify-center text-xs font-bold text-center leading-tight">
               <img
                 className="rotate-320"
-                src="../../public/monster-resources-hackathon/right-arrow-svgrepo-com.svg"
+                src="/monster-resources-hackathon/right-arrow-svgrepo-com.svg"
                 alt=""
               />
             </div>
@@ -99,21 +94,20 @@ const Contact = () => {
             <div className="h-full px-2 py-8">
               <div className="mb-6">
                 <h3 className="font-bold mb-1 text-lg">Address</h3>
-                <p>
-                  457 Washington Ave. Manchester,
-                  <br /> Kentucky 39495
-                </p>
+                <a href="https://www.google.com/maps?q=(3291+Energy+Beverages+LLC+Company+2390+Anselmo+Drive)" target="_blank">
+                  1 Monster Way Corona <br/> Corona, CA 92879
+                </a>
               </div>
 
               <div className="mb-6">
                 <h3 className="font-bold mb-1 text-lg">Contact</h3>
-                <p>Phone : +0123-456-789</p>
+                <p>Phone : 1-866-322-4466</p>
                 <p>Email : example@email.com</p>
               </div>
 
               <div className="mb-6">
                 <h3 className="font-bold mb-1 text-lg">Open Time</h3>
-                <p>Monday - Friday : 10.00 - 20.00</p>
+                <p>Mon - Fri: 8 AM - 5 PM PST</p>
               </div>
 
               <div>

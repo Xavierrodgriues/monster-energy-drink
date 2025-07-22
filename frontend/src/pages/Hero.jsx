@@ -124,7 +124,7 @@ const Hero = () => {
             <div className="h-20 w-30 pr-2">
               <img
                 className="w-full h-full object-contain"
-                src="/monster-resources-hackathon/fourPerson.png"
+                src="https://ik.imagekit.io/wr6ziyjiu/fourPerson.png?updatedAt=1753179997696"
                 alt=""
               />
             </div>
@@ -134,7 +134,7 @@ const Hero = () => {
                 muted
                 loop
                 className="w-full h-full object-cover"
-                src="/monster-resources-hackathon/thumbnail-video.mp4"
+                src="https://ik.imagekit.io/wr6ziyjiu/thumbnail-video.mp4/ik-video.mp4?updatedAt=1753179999146"
               ></video>
             </div>
           </div>
@@ -157,28 +157,28 @@ const Hero = () => {
               <img
                 className="w-5 h-5"
                 src="/monster-resources-hackathon/facebook-svgrepo-com.svg"
-                alt=""
+                alt="fb"
               />
             </li>
             <li>
               <img
                 className="w-5 h-5"
-                src="https://static.vecteezy.com/system/resources/thumbnails/027/714/631/small_2x/sankt-petersburg-russia-24-08-2023-twitter-new-logo-twitter-icons-twitter-x-logo-free-png.png"
-                alt=""
+                src="https://ik.imagekit.io/wr6ziyjiu/X.webp?updatedAt=1753179537396"
+                alt="X"
               />
             </li>
             <li>
               <img
                 className="w-5 h-5"
                 src="/monster-resources-hackathon/insta-svgrepo-com.svg"
-                alt=""
+                alt="insta"
               />
             </li>
             <li>
               <img
                 className="w-5 h-5"
                 src="/monster-resources-hackathon/youtube-svgrepo-com.svg"
-                alt=""
+                alt="yt"
               />
             </li>
           </ul>

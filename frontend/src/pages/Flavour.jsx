@@ -47,9 +47,10 @@ const Flavour = () => {
     // 🎯 FIRE UP scale animation using ScrollTrigger + scrub
     gsap.fromTo(
       fireUpRef.current,
-      { scale: 0.2 }, // Start smaller for more bounce feel
+      { scale: 0.2, opacity: 0 }, // Start smaller for more bounce feel
       {
         scale: 1,
+        opacity: 1,
         ease: "ease.in",
         scrollTrigger: {
           trigger: fireUpRef.current,

@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: "kaushan";
-    src: url("/font/KaushanScript-Regular.ttf");
+    src: url("/font/KaushanScript-Regular.woff2");
 }
 
 @font-face {
     font-family: "dirty-brush";
-    src: url("/font/Dirty\ Brush.ttf");
+    src: url("/font/Dirty\ Brush.woff2");
 }
 
 /* Hide scrollbar for all elements */
