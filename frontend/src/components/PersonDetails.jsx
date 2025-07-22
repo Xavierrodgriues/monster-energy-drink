@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUser } from "@clerk/clerk-react";
+import { removeCoupon } from "../redux/couponSlice";
 
 const PersonDetails = ({ totalCost }) => {
   const {
@@ -99,7 +100,7 @@ const PersonDetails = ({ totalCost }) => {
 
               // ✅ Clear the cart here
               dispatch(clearCart());
-
+              dispatch(removeCoupon());
               // ✅ Optional: Redirect to success page
               navigate("/myOrders");
             } else {

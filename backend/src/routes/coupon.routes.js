@@ -1,6 +1,5 @@
 const express = require("express");
-const assignedCoupon = require("../controllers/assignCoupon.controller");
-const validateCoupon = require("../controllers/validateCoupon.controller");
+const {assignedCoupon, validateCoupon} = require("../controllers/coupon.controller");
 
 const router = express.Router();
 

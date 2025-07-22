@@ -73,7 +73,7 @@ const Contact = () => {
                 <button className="bg-zinc-800 hover:cursor-pointer active:scale-95 text-black font-semibold px-4 py-3 rounded-full">
                   <img
                     className="w-5"
-                    src="../../public/monster-resources-hackathon/right-arrow-svgrepo-com.svg"
+                    src="/monster-resources-hackathon/right-arrow-svgrepo-com.svg"
                     alt=""
                   />
                 </button>
