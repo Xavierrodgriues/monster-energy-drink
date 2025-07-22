@@ -895,7 +895,7 @@ export default function InfiniteMenu({ items = [] }) {
               hidden
           select-none
           absolute
-          md:block
+          xl:block
           font-black
           [font-size:4rem]
           left-[1.6em]
@@ -920,7 +920,7 @@ export default function InfiniteMenu({ items = [] }) {
           select-none
           absolute
           hidden
-          md:block
+          xl:block
           max-w-[20ch]
           text-[1.5rem]
           top-1/2

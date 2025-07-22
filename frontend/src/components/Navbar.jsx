@@ -24,7 +24,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full relative z-50">
       <div className="flex items-center justify-between px-4 md:px-10 py-4">
         {/* Left: Logo */}
         <div className="h-10 flex-shrink-0">
@@ -35,39 +35,41 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Center: Desktop Nav Menu */}
-        <div className="hidden md:flex flex-1 justify-center">
-          <div className="bg-black/20 md:p-0 backdrop-blur-md rounded-3xl overflow-hidden shadow-lg border border-white/30 px-4 py-1 max-h-10">
-            <ul className="flex h-full">
-              {navItems.map((item) => (
-                <li key={item.path} className="relative">
-                  <NavLink
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `relative z-10 w-30 md:p-2 flex items-center justify-center px-6 text-sm transition-all duration-300
-                      ${
-                        isActive ? "text-black" : "hover:bg-white/10 text-white"
-                      }`
-                    }
-                  >
-                    {({ isActive }) => (
-                      <>
-                        {item.label}
-                        {isActive && (
-                          <span className="hidden md:block absolute inset-0 bg-white z-[-1] rounded-[1.5rem]"></span>
-                        )}
-                      </>
-                    )}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+       {/* Center: Desktop Nav Menu */}
+<div className="hidden lg:flex flex-1 justify-center">
+  <div className="w-full max-w-sm bg-black/20 backdrop-blur-md rounded-3xl shadow-lg border border-white/30 px-2 py-1">
+    <ul className="flex h-full justify-between gap-1">
+      {navItems.map((item) => (
+        <li key={item.path} className="relative">
+          <NavLink
+            to={item.path}
+            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) =>
+              `relative z-10 px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm flex items-center justify-center transition-all duration-300 ease-in-out ${
+                isActive ? "text-black" : "hover:bg-white/10 text-white"
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                {item.label}
+                {isActive && (
+                  <span
+                    className="absolute inset-0 bg-white z-[-1] rounded-full transition-all duration-300 ease-in-out scale-95 opacity-90"
+                  ></span>
+                )}
+              </>
+            )}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
 
-        {/* Right: Login and Cart */}
-        <div className="hidden md:flex items-center gap-2 ml-4">
+
+        {/* Right: Desktop Login and Cart */}
+        <div className="hidden lg:flex items-center gap-2 ml-4">
           <div className="cursor-pointer bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-5 rounded-full">
             <header>
               <SignedOut>
@@ -78,7 +80,8 @@ const Navbar = () => {
               </SignedIn>
             </header>
           </div>
-          <NavLink to={"/drinks/cart"}>
+
+          <NavLink to="/drinks/cart">
             <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
                 src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
@@ -94,8 +97,8 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        {/* Right: Mobile Login + Cart + Hamburger */}
-        <div className="md:hidden flex items-center gap-2">
+        {/* Right: Mobile Menu - Auth + Cart + Hamburger */}
+        <div className="flex items-center gap-2 lg:hidden">
           <div className="cursor-pointer text-sm bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-3 rounded-full">
             <header>
               <SignedOut>
@@ -107,7 +110,7 @@ const Navbar = () => {
             </header>
           </div>
 
-          <NavLink to={"/drinks/cart"}>
+          <NavLink to="/drinks/cart">
             <div className="relative w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black p-1 rounded-full cursor-pointer flex items-center justify-center">
               <img
                 src="/monster-resources-hackathon/cart-shopping-svgrepo-com.svg"
@@ -122,7 +125,8 @@ const Navbar = () => {
             </div>
           </NavLink>
 
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {/* Hamburger toggle button */}
+          <button onClick={() => setIsMenuOpen((prev) => !prev)}>
             <svg
               className="w-6 h-6 text-white"
               fill="none"
@@ -148,9 +152,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Nav Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-[70px] left-2 right-2 z-50 bg-black/30 backdrop-blur-md rounded-xl shadow-md border border-white/10">
+        <div className="lg:hidden fixed top-[70px] left-4 right-4 z-40 bg-black/30 backdrop-blur-md rounded-xl shadow-md border border-white/10">
           <ul className="flex flex-col items-center gap-2 py-4 px-4">
             {navItems.map((item) => (
               <li key={item.path} className="w-full text-center">

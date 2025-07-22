@@ -142,11 +142,11 @@ const Hero = () => {
 
         {/* ✅ Small screen layout - bottom centered */}
         <div className="lg:hidden absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-4">
-          <div className="text-center">
-            <h1 className="text-xl font-light leading-snug">
+          <div className="text-center text-xl md:text-5xl">
+            <h1 className="font-light leading-snug">
               Ignite your Pulse
             </h1>
-            <h1 className="text-xl font-light">
+            <h1 className="font-light">
               with{" "}
               <span className="font-[kaushan] text-lime-400">CAFFEINE</span>
             </h1>

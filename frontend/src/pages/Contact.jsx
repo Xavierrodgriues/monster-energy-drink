@@ -20,7 +20,7 @@ const Contact = () => {
         </header> */}
 
         {/* Green Navigation Strip */}
-        <nav className="bg-lime-400 h-13 text-black text-lg font-semibold flex flex-wrap justify-center gap-6 py-2">
+        <nav className="bg-lime-400 hidden h-13 text-black text-lg font-semibold md:flex flex-wrap justify-center gap-6 py-2">
           <CurvedLoop
             marqueeText="Unleash      ✦The     ✦ Beast      ✦ With       ✦ Monster      ✦"
             speed={2}
@@ -32,11 +32,11 @@ const Contact = () => {
         </nav>
 
         {/* Main Section */}
-        <section className="bg-[#090701] text-white py-10 px-5 md:px-20 lg:px-36 flex flex-col md:flex-row gap-10 items-start">
+        <section className="bg-[#090701] text-white py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 flex flex-col lg:flex-row gap-8 items-start">
           {/* Left: Form */}
           <div className="w-full md:w-2/3">
             <p className="text-black text-sm mb-2">Contact Us</p>
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 leading-snug">
               Join Us in Creating <br /> Something Great
             </h2>
 
@@ -71,7 +71,7 @@ const Contact = () => {
                 rows="4"
                 className="p-3 rounded bg-gray-200 md:col-span-2"
               ></textarea>
-              <div className="flex gap-5">
+              <div className="flex sm:flex-row gap-3 sm:gap-5 mt-4 text-sm">
                 <button className="bg-lime-400 hover:cursor-pointer active:scale-95 text-black font-semibold px-6 py-3 rounded-full w-fit">
                   Send Message
                 </button>
@@ -87,7 +87,7 @@ const Contact = () => {
           </div>
 
           {/* Right: Info Box */}
-          <div className="bg-lime-400 rounded-lg p-6 text-black w-full md:w-1/3 relative h-120 transform hover:rotate-6 transition-transform duration-500">
+          <div className="bg-lime-400 rounded-lg p-6 text-black w-full lg:w-1/3 relative transform hover:rotate-6 transition-transform duration-500">
             <div className="absolute top-[-30px] right-[-30px] bg-black text-white rounded-full w-[140px] h-[140px] flex items-center justify-center text-xs font-bold text-center leading-tight">
               <img
                 className="rotate-320"
@@ -154,7 +154,7 @@ const Contact = () => {
         </section>
 
         {/* Bottom Curved Marquee */}
-        <nav className="bg-lime-400 h-13 text-black text-lg font-semibold flex flex-wrap justify-center gap-6 py-2">
+        <nav className="bg-lime-400 hidden h-13 text-black text-lg font-semibold md:flex flex-wrap justify-center gap-6 py-2">
           <CurvedLoop
             marqueeText="Energy       ✦ That       ✦ Hits       ✦ Hard       ✦ Monster      ✦ Style      ✦
 "

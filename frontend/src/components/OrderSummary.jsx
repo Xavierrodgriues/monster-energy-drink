@@ -39,7 +39,7 @@ const OrderSummary = ({
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value)}
               placeholder="Enter your code"
-              className="w-full p-2 bg-gray-800 text-white border border-gray-600 rounded"
+              className="w-full p-2 bg-gray-800 text-white border border-gray-600 focus:border-lime-600 outline-none rounded"
             />
 
             {isCouponApplied && (
@@ -57,7 +57,7 @@ const OrderSummary = ({
 
             <button
               onClick={handleApplyCoupon}
-              className="bg-lime-400 hover:bg-lime-400/80 px-4 py-2 rounded text-black font-bold"
+              className="bg-lime-400 hover:bg-lime-400/80 cursor-pointer px-4 py-2 rounded text-black font-bold"
             >
               Apply
             </button>
@@ -85,7 +85,7 @@ const OrderSummary = ({
       {showCheckout && (
         <button
           onClick={() => navigate("/checkout")}
-          className="w-full bg-[#EE440E] hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
+          className="w-full bg-[#EE440E] cursor-pointer hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
         >
           Checkout
         </button>

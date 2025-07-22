@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from "./pages/CheckoutPage";
 import MyOrders from "./pages/MyOrders";
+import { FaSpinner } from "react-icons/fa";
+
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -16,10 +18,11 @@ const Hero = lazy(() => import("./pages/Hero"));
 const Flavour = lazy(() => import("./pages/Flavour"));
 const Drinks = lazy(() => import("./pages/Drinks"));
 const Contact = lazy(() => import("./pages/Contact"));
-const About = lazy(() => import("./pages/About"));
+const About = lazy(() => import("./pages/Story"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Labubu = lazy(() => import("./pages/Labubu"));
 const CartPage = lazy(() => import("./pages/CartPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   const location = useLocation();
@@ -47,7 +50,7 @@ function App() {
       {showCover && <CoverAnimation onFinish={() => setShowCover(false)} />}
 
       <div id="smooth-content" className={`${showCover ? "overflow-hidden h-screen" : ""}`}>
-        <Suspense fallback={<div className="text-white text-center py-10">Loading...</div>}>
+        <Suspense fallback={<FaSpinner />}>
           <Routes location={location} key={location.pathname}>
             <Route
               path="/"
@@ -66,6 +69,7 @@ function App() {
             <Route path="/drinks/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/myOrders" element={<MyOrders />}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
         <ToastContainer position="top-center" autoClose={3000} />

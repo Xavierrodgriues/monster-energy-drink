@@ -22,7 +22,7 @@ const About = () => {
       description: "Vice chairman and President",
     },
     {
-      image: "/monster-resources-hackathon/labubu.png",
+      image: "/monster-resources-hackathon/labubu-removebg-preview.png",
       link: "https://en.wikipedia.org/wiki/Monster_Beverage",
       title: "Growth",
       description: "Valuation of over $50 billion",

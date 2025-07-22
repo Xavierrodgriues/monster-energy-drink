@@ -2,10 +2,12 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import FiltersContent from "../components/FiltersContent";
-import ProductCard from "../components/ProductCard";
 import "react-toastify/dist/ReactToastify.css";
 import { useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
+import { Suspense, lazy } from "react";
+import { FaSpinner } from "react-icons/fa";
+const ProductCard = lazy(() => import("../components/ProductCard"));
 
 const Drinks = () => {
   const { allDrinks, filteredDrinks, filters } = useSelector(
@@ -171,7 +173,9 @@ const Drinks = () => {
                   currentPage * itemsPerPage
                 )
                 .map((drink) => (
-                  <ProductCard key={drink.id} drink={drink} />
+                  <Suspense fallback={<FaSpinner />} key={drink.id}>
+      <ProductCard drink={drink} />
+    </Suspense>
                 ))}
             </div>
           </div>
