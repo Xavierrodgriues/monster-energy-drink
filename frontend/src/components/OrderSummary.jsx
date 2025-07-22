@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const OrderSummary = ({
   subtotal,
@@ -16,6 +17,7 @@ const OrderSummary = ({
   showActions = true,
   showCheckout = true,
 }) => {
+
   const navigate = useNavigate();
   return (
     <div className="w-full lg:w-1/3 bg-[#1e1e1e] p-6 rounded-lg h-fit">
@@ -84,7 +86,12 @@ const OrderSummary = ({
 
       {showCheckout && (
         <button
-          onClick={() => navigate("/checkout")}
+          onClick={() =>{
+            if(totalCost <= 5){
+              toast.info("Purchase some drinks");
+              return;
+            }
+            navigate("/checkout")}}
           className="w-full bg-[#EE440E] cursor-pointer hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
         >
           Checkout

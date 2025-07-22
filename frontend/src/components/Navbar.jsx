@@ -35,38 +35,35 @@ const Navbar = () => {
           />
         </div>
 
-       {/* Center: Desktop Nav Menu */}
-<div className="hidden lg:flex flex-1 justify-center">
-  <div className="w-full max-w-sm bg-black/20 backdrop-blur-md rounded-3xl shadow-lg border border-white/30 px-2 py-1">
-    <ul className="flex h-full justify-between gap-1">
-      {navItems.map((item) => (
-        <li key={item.path} className="relative">
-          <NavLink
-            to={item.path}
-            onClick={() => setIsMenuOpen(false)}
-            className={({ isActive }) =>
-              `relative z-10 px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm flex items-center justify-center transition-all duration-300 ease-in-out ${
-                isActive ? "text-black" : "hover:bg-white/10 text-white"
-              }`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                {item.label}
-                {isActive && (
-                  <span
-                    className="absolute inset-0 bg-white z-[-1] rounded-full transition-all duration-300 ease-in-out scale-95 opacity-90"
-                  ></span>
-                )}
-              </>
-            )}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </div>
-</div>
-
+        {/* Center: Desktop Nav Menu */}
+        <div className="hidden lg:flex flex-1 justify-center">
+          <div className="w-full max-w-sm bg-black/20 backdrop-blur-md rounded-3xl shadow-lg border border-white/30 px-2 py-1">
+            <ul className="flex h-full justify-between gap-1">
+              {navItems.map((item) => (
+                <li key={item.path} className="relative">
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `relative z-10 px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm flex items-center justify-center transition-all duration-300 ease-in-out ${
+                        isActive ? "text-black" : "hover:bg-white/10 text-white"
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        {item.label}
+                        {isActive && (
+                          <span className="absolute inset-0 bg-white z-[-1] rounded-full transition-all duration-300 ease-in-out scale-95 opacity-90"></span>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         {/* Right: Desktop Login and Cart */}
         <div className="hidden lg:flex items-center gap-2 ml-4">

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUser } from "@clerk/clerk-react";
 import { removeCoupon } from "../redux/couponSlice";
+import { useState } from "react";
 
 const PersonDetails = ({ totalCost }) => {
   const {
@@ -15,8 +16,8 @@ const PersonDetails = ({ totalCost }) => {
     formState: { errors },
   } = useForm();
 
-  const {user} = useUser();
-
+  const { user } = useUser();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,9 +34,11 @@ const PersonDetails = ({ totalCost }) => {
   };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const res = await loadRazorpayScript();
     if (!res) {
       alert("Razorpay SDK failed to load.");
+      setLoading(false);
       return;
     }
 
@@ -110,6 +113,14 @@ const PersonDetails = ({ totalCost }) => {
             console.error(err);
             toast.error("Error saving order");
           }
+          setLoading(false);
+        },
+        modal: {
+          ondismiss: function () {
+            // ✅ Called when user closes Razorpay popup
+            setLoading(false);
+            toast.info("Payment cancelled");
+          },
         },
 
         prefill: {
@@ -128,6 +139,7 @@ const PersonDetails = ({ totalCost }) => {
     } catch (error) {
       console.error("Payment Error:", error);
       alert("Something went wrong");
+      setLoading(false);
     }
   };
   return (
@@ -335,9 +347,14 @@ const PersonDetails = ({ totalCost }) => {
           </NavLink>
           <button
             type="submit"
-            className="p-4 bg-gradient-to-r hover:cursor-pointer from-lime-500 to-lime-400 active:scale-95 text-black font-bold py-3 rounded-md shadow-lg"
+            disabled={loading}
+            className={`p-4 bg-gradient-to-r from-lime-500 to-lime-400 text-black font-bold py-3 rounded-md shadow-lg ${
+              loading
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:cursor-pointer active:scale-95"
+            }`}
           >
-            Pay Now
+            {loading ? "Processing..." : "Pay Now"}
           </button>
         </div>
       </form>

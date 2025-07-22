@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaSpinner } from "react-icons/fa";
 import Hero from "./pages/Hero";
 import CoverAnimation from "./components/CoverAnimation";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -68,7 +69,7 @@ function App() {
             <Route path="/drinks/:id" element={<ProductDetails />} />
             <Route path="/drinks/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/myOrders" element={<MyOrders />}/>
+            <Route path="/myOrders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
