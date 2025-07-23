@@ -4,12 +4,14 @@ import {
   SignedOut,
   SignInButton,
   UserButton,
+  useUser
 } from "@clerk/clerk-react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {isSignedIn} = useUser();
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -67,7 +69,7 @@ const Navbar = () => {
 
         {/* Right: Desktop Login and Cart */}
         <div className="hidden lg:flex items-center gap-2 ml-4">
-          <div className="cursor-pointer bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-5 rounded-full">
+          <div className={`cursor-pointer ${!isSignedIn && "bg-gradient-to-t from-lime-300 to-lime-600"} text-black py-1 px-5 rounded-full`}>
             <header>
               <SignedOut>
                 <SignInButton />
@@ -96,7 +98,7 @@ const Navbar = () => {
 
         {/* Right: Mobile Menu - Auth + Cart + Hamburger */}
         <div className="flex items-center gap-2 lg:hidden">
-          <div className="cursor-pointer text-sm bg-gradient-to-t from-lime-300 to-lime-600 text-black py-1 px-3 rounded-full">
+          <div className={`cursor-pointer text-sm ${!isSignedIn && "bg-gradient-to-t from-lime-300 to-lime-600"} text-black py-1 px-3 rounded-full`}>
             <header>
               <SignedOut>
                 <SignInButton />

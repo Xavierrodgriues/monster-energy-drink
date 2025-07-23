@@ -65,7 +65,7 @@ const Labubu = () => {
             <h1>into reality.</h1>
           </div>
           <div className="text-center font-[dirty-brush]">
-            <p>The full strength of mana is comes from</p>
+            <p>The full strength of monster is comes from</p>
             <p>naturally infused taurine.</p>
           </div>
           <NavLink to="/drinks" className="flex justify-center">

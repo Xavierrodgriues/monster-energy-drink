@@ -68,7 +68,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/drinks/:id" element={<ProductDetails />} />
             <Route path="/drinks/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
             <Route path="/myOrders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 
 const OrderSummary = ({
@@ -17,8 +18,23 @@ const OrderSummary = ({
   showActions = true,
   showCheckout = true,
 }) => {
-
   const navigate = useNavigate();
+  const { isSignedIn } = useUser(); // Clerk's auth hook
+
+  const handleCheckout = () => {
+    if (!isSignedIn) {
+      toast.error("Please sign in to proceed to checkout");
+      return;
+    }
+
+    if (totalCost <= 5) {
+      toast.info("Purchase some drinks");
+      return;
+    }
+
+    navigate("/checkout");
+  };
+
   return (
     <div className="w-full lg:w-1/3 bg-[#1e1e1e] p-6 rounded-lg h-fit">
       <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
@@ -43,7 +59,6 @@ const OrderSummary = ({
               placeholder="Enter your code"
               className="w-full p-2 bg-gray-800 text-white border border-gray-600 focus:border-lime-600 outline-none rounded"
             />
-
             {isCouponApplied && (
               <button
                 onClick={() => {
@@ -56,7 +71,6 @@ const OrderSummary = ({
                 Remove
               </button>
             )}
-
             <button
               onClick={handleApplyCoupon}
               className="bg-lime-400 hover:bg-lime-400/80 cursor-pointer px-4 py-2 rounded text-black font-bold"
@@ -86,12 +100,7 @@ const OrderSummary = ({
 
       {showCheckout && (
         <button
-          onClick={() =>{
-            if(totalCost <= 5){
-              toast.info("Purchase some drinks");
-              return;
-            }
-            navigate("/checkout")}}
+          onClick={handleCheckout}
           className="w-full bg-[#EE440E] cursor-pointer hover:bg-[#EE440E]/80 py-3 rounded text-white font-bold mt-4"
         >
           Checkout

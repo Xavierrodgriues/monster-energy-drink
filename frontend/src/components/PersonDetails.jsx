@@ -16,7 +16,7 @@ const PersonDetails = ({ totalCost }) => {
     formState: { errors },
   } = useForm();
 
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,6 +35,12 @@ const PersonDetails = ({ totalCost }) => {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    
+    if (!isSignedIn) {
+      toast.error("Please sign in to continue with the payment.");
+      setLoading(false);
+      return;
+    }
     const res = await loadRazorpayScript();
     if (!res) {
       alert("Razorpay SDK failed to load.");
