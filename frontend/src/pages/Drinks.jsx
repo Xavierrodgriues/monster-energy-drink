@@ -1,12 +1,12 @@
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import FiltersContent from "../components/FiltersContent";
 import "react-toastify/dist/ReactToastify.css";
 import { useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
+import { Suspense, lazy } from "react";
 import { FaSpinner } from "react-icons/fa";
-
 const ProductCard = lazy(() => import("../components/ProductCard"));
 
 const Drinks = () => {
@@ -14,69 +14,42 @@ const Drinks = () => {
     (state) => state.filters
   );
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
   const isFilterApplied = Object.values(filters).some((val) => val.length > 0);
   const drinksToRender = isFilterApplied ? filteredDrinks : allDrinks;
 
+  const isValidEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const { user } = useUser();
   const [emailInput, setEmailInput] = useState("");
   const [cooldown, setCooldown] = useState(false);
-  const [cooldownEnd, setCooldownEnd] = useState(null);
-  const [countdown, setCountdown] = useState("");
-
-  // Load cooldown from localStorage on page load
-  useEffect(() => {
-    const storedEnd = localStorage.getItem("couponCooldownEnd");
-    if (storedEnd) {
-      const end = new Date(storedEnd).getTime();
-      const now = Date.now();
-      if (now < end) {
-        setCooldown(true);
-        setCooldownEnd(end);
-      }
-    }
-  }, []);
-
-  // Countdown updater
-  useEffect(() => {
-    if (!cooldownEnd) return;
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const distance = cooldownEnd - now;
-
-      if (distance <= 0) {
-        clearInterval(interval);
-        setCooldown(false);
-        setCountdown("");
-        localStorage.removeItem("couponCooldownEnd");
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [cooldownEnd]);
-
-  const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const handleGetCoupon = async () => {
-    if (!emailInput) return toast.error("Please enter your email.");
-    if (!isValidEmail(emailInput)) return toast.error("Invalid email format.");
-    if (emailInput !== user?.primaryEmailAddress?.emailAddress)
+    if (!emailInput) {
+      return toast.error("Please enter your email.");
+    }
+
+    if (!isValidEmail(emailInput)) {
+      return toast.error("Invalid email format.");
+    }
+
+    if (emailInput !== user?.primaryEmailAddress?.emailAddress) {
       return toast.error("Entered email does not match your logged-in email.");
-    if (cooldown) return;
+    }
+
+    if (cooldown) {
+      return toast.warn("Please wait 20 seconds before requesting again.");
+    }
 
     try {
+      setCooldown(true);
+
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/coupons/assign-coupon`,
         {
@@ -93,17 +66,17 @@ const Drinks = () => {
       if (response.ok) {
         toast.success(`🎉 Coupon sent to ${emailInput}`);
         setEmailInput("");
-
-        // Set 5-day cooldown
-        const end = Date.now() + 5 * 24 * 60 * 60 * 1000;
-        setCooldown(true);
-        setCooldownEnd(end);
-        localStorage.setItem("couponCooldownEnd", new Date(end).toISOString());
       } else {
         toast.error(data.message || "Failed to get coupon.");
       }
+
+      // Cooldown reset after 20 seconds
+      setTimeout(() => {
+        setCooldown(false);
+      }, 20000);
     } catch (error) {
-      toast.error("Something went wrong! " + error.message);
+      toast.error("Something went wrong!" + error);
+      setCooldown(false);
     }
   };
 
@@ -112,6 +85,7 @@ const Drinks = () => {
       <Navbar />
       <div className="flex flex-col lg:flex-row">
         {/* Sidebar Filters */}
+
         <aside className="w-full hidden md:hidden lg:block lg:w-1/5 p-4 space-y-6">
           <FiltersContent />
         </aside>
@@ -124,21 +98,27 @@ const Drinks = () => {
             <img
               className="w-5 h-5 object-contain"
               src="/monster-resources-hackathon/filter-svgrepo-com.svg"
-              alt="Filter"
+              alt=""
             />
           </div>
         </div>
 
+        {/* Modal for filters on small screens */}
         {isFilterOpen && (
           <div className="fixed inset-0 z-50 bg-black bg-opacity-70 h-[80vh] flex justify-center items-center lg:hidden">
             <div className="bg-[#151311] w-[90%] max-h-[80vh] overflow-y-auto p-6 rounded-lg relative">
+              {/* Close Button */}
               <button
                 onClick={() => setIsFilterOpen(false)}
                 className="absolute top-2 right-3 text-white text-2xl font-bold"
               >
                 &times;
               </button>
+
+              {/* Modal Header */}
               <h2 className="text-xl font-bold mb-4 text-center">Filters</h2>
+
+              {/* FiltersContent Component */}
               <FiltersContent />
             </div>
           </div>
@@ -159,26 +139,27 @@ const Drinks = () => {
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="Your email address"
                   className="p-2 w-35 md:w-auto border focus:border-lime-400 outline-none border-gray-400 rounded"
-                  disabled={cooldown}
                 />
 
-                {cooldown ? (
-                  <div className="px-4 py-2 rounded text-white bg-gray-600 cursor-not-allowed">
-                    Wait: {countdown}
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleGetCoupon}
-                    className="px-4 py-2 bg-lime-400 hover:bg-lime-500 text-black rounded active:scale-95"
-                  >
-                    Get Coupon
-                  </button>
-                )}
+                <button
+                  onClick={handleGetCoupon}
+                  disabled={cooldown}
+                  className={`px-4 py-2 rounded text-black ${
+                    cooldown
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-lime-400 hover:bg-lime-500"
+                  }`}
+                >
+                  {cooldown ? "Wait..." : "Get Coupon"}
+                </button>
+
+                {/* Toast Container */}
               </div>
             </div>
 
+            {/* Image instead of colored box */}
             <img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs9xYUoN65O3g0X9X5QkfMgDng7TEvoA96XGFv8VniRE9rCA9Kxd4pN-_2gGwmGP2kDENm2uvWtW-A2M_WkQ6OXrzKN-cEekF11s_d0J4Vwj2RfaIjIgAylcY5InD7DtPo2zZUz7NjDEQ/s1600/Tickle_LasVegas_Cox_2011_077.jpg"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs9xYUoN65O3g0X9X5QkfMgDng7TEvoA96XGFv8VniRE9rCA9Kxd4pN-_2gGwmGP2kDENm2uvWtW-A2M_WkQ6OXrzKN-cEekF11s_d0J4Vwj2RfaIjIgAylcY5InD7DtPo2zZUz7NjDEQ/s1600/Tickle_LasVegas_Cox_2011_077.jpg" // Replace with actual path or URL
               alt="Coffee Discount"
               className="h-35 w-35 object-cover rounded-lg hidden lg:block"
             />
@@ -187,6 +168,7 @@ const Drinks = () => {
           {/* Product Grid */}
           <div>
             <h2 className="text-2xl font-bold mb-4">Popular Products</h2>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {drinksToRender
                 .slice(
@@ -208,7 +190,6 @@ const Drinks = () => {
             </div>
           </div>
 
-          {/* Pagination */}
           <div className="flex justify-center mt-6 gap-2">
             {Array.from(
               { length: Math.ceil(drinksToRender.length / itemsPerPage) },
