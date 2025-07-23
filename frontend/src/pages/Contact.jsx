@@ -76,7 +76,7 @@ const Contact = () => {
                 <button className="bg-lime-400 hover:cursor-pointer active:scale-95 text-black font-semibold px-6 py-3 rounded-full w-fit">
                   Send Message
                 </button>
-                <button className="bg-zinc-800 hover:cursor-pointer active:scale-95 text-black font-semibold px-4 py-3 rounded-full">
+                <button type="reset" className="bg-zinc-800 hover:cursor-pointer active:scale-95 text-black font-semibold px-4 py-3 rounded-full">
                   <img
                     className="w-5"
                     src="/monster-resources-hackathon/right-arrow-svgrepo-com.svg"

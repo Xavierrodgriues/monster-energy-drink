@@ -64,7 +64,7 @@ const PersonDetails = ({ totalCost }) => {
         key: import.meta.env.VITE_RAZORPAY_API_KEY,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: "Your Store Name",
+        name: "Monster Energy Drink",
         description: "Order Payment",
         order_id: orderData.id,
         handler: async function (response) {
@@ -149,7 +149,7 @@ const PersonDetails = ({ totalCost }) => {
     }
   };
   return (
-    <div className="flex-1 bg-[#1E1E1E] px-8 py-5 rounded-2xl shadow-xl border border-[#2e2e2e]">
+    <div className="flex-1 bg-[#131313] px-8 py-5 rounded-2xl shadow-xl border border-[#2e2e2e]">
       <h2 className="text-3xl font-bold mb-6 text-white">
         Delivery Information
       </h2>

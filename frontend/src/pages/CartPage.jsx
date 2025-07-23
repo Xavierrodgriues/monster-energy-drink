@@ -71,9 +71,9 @@ const CartPage = () => {
   const totalCost = subtotal - discountAmount + shipping;
 
   return (
-    <>
+    <div className="bg-[#090701]">
       <Navbar />
-      <div className="min-h-screen bg-[#090701] text-white px-4 md:px-12 py-8">
+      <div className="min-h-screen text-white px-4 md:px-12 py-8">
         <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Cart Items */}
@@ -168,7 +168,7 @@ const CartPage = () => {
           </NavLink>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

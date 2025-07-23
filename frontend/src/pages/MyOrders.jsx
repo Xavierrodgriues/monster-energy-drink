@@ -78,9 +78,9 @@ const MyOrders = () => {
   }
 
   return (
-    <>
+    <div className="bg-[#090701]">
       <Navbar />
-      <div className="bg-[#090701] min-h-screen text-white py-10 px-6 lg:px-20">
+      <div className="min-h-screen text-white py-10 px-6 lg:px-20">
         <h1 className="text-4xl font-bold mb-10">My Orders</h1>
 
         {orders.length === 0 ? (
@@ -90,7 +90,7 @@ const MyOrders = () => {
             {orders.map((order) => (
               <div
                 key={order._id}
-                className="bg-gray-900 rounded-xl shadow-md p-5 space-y-5 border border-gray-700"
+                className="bg-[#131313] rounded-xl shadow-md p-5 space-y-5 border border-gray-700"
               >
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">Order ID</h2>
@@ -153,7 +153,7 @@ const MyOrders = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
