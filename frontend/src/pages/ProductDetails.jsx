@@ -99,6 +99,17 @@ const ProductDetails = () => {
               </button>
               <NavLink
                 to={"/drinks/cart"}
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      id: drink.id,
+                      name: drink.name,
+                      image: drink.image,
+                      price: drink.price,
+                      packSize: drink.packSize,
+                    })
+                  )
+                }
                 className="relative overflow-hidden border border-white px-6 py-2 rounded font-semibold text-white transition-all duration-800 group"
               >
                 <span className="relative z-10 group-hover:text-black transition-all duration-800">
