@@ -36,7 +36,7 @@ const OrderSummary = ({
   };
 
   return (
-    <div className="w-full lg:w-1/3 bg-[#1e1e1e] p-6 rounded-lg h-fit">
+    <div className="w-full lg:w-1/3 bg-[#131313] p-6 rounded-lg h-fit">
       <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
       <div className="flex justify-between py-2 border-b border-gray-700">
         <p>Items</p>

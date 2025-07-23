@@ -73,16 +73,20 @@ const CartPage = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#121212] text-white px-4 md:px-12 py-8">
+      <div className="min-h-screen bg-[#090701] text-white px-4 md:px-12 py-8">
         <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Cart Items */}
-          <div className="flex-1 bg-[#1e1e1e] p-6 rounded-lg">
+          <div className="flex-1 bg-[#131313] p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <p className="text-xl font-semibold">{totalItems} Items</p>
               <button
                 className="text-red-500 cursor-pointer hover:underline text-sm"
-                onClick={() => dispatch(clearCart())}
+                onClick={() => {
+                  dispatch(clearCart());
+                  dispatch(removeCoupon());
+                  setCouponCode("");  
+                }}
               >
                 Clear Cart
               </button>
