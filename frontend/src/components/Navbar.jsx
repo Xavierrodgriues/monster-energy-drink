@@ -19,6 +19,7 @@ const Navbar = () => {
     { label: "Drinks", path: "/drinks" },
     { label: "Orders", path: "/myOrders" },
     { label: "Contact", path: "/contact" },
+    { label: "Collab", path: "/collab" },
   ];
 
   const totalItems = useSelector((state) =>
@@ -39,7 +40,7 @@ const Navbar = () => {
 
         {/* Center: Desktop Nav Menu */}
         <div className="hidden lg:flex flex-1 justify-center">
-          <div className="w-full max-w-sm bg-black/20 backdrop-blur-md rounded-3xl shadow-lg border border-white/30 px-2 py-1">
+          <div className="w-full max-w-lg bg-black/20 backdrop-blur-md rounded-3xl shadow-lg border border-white/30 px-2 py-1">
             <ul className="flex h-full justify-between gap-1">
               {navItems.map((item) => (
                 <li key={item.path} className="relative">
